@@ -1,4 +1,5 @@
-Information
+Google Authenticator in Symfony 5
+
   - Symfony 5.*
   -	Login and Registration 
   -	 Authenticated User Dashboard
