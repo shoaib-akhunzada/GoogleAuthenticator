@@ -1,4 +1,5 @@
 Information
+  - Symfony 5.*
   -	Login and Registration 
   -	 Authenticated User Dashboard
   -	 User Settings Page for turning on/off/reconfiguring two factor authentication.
