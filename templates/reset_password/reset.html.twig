@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    <div class="col-md-7 mx-auto border border-light p-5 mt-5">
+        <p class="h4 mb-4 text-center">Reset password</p>
+
+        {{ form_start(resetForm) }}
+            <div class="pb-2">
+                {{ form_errors(resetForm.plainPassword.first) }}
+            </div>
+            {{ form_widget(resetForm.plainPassword.first) }}
+            <small class="form-text text-muted mb-4">
+                {{ form_help(resetForm.plainPassword.first, {'attr': {'class': 'mb-4'}}) }}
+            </small>
+
+            <div class="pb-2">
+                {{ form_errors(resetForm.plainPassword.second) }}
+            </div>
+            {{ form_widget(resetForm.plainPassword.second, {'attr': {'class': 'mb-4'}}) }}
+
+
+            <button class="btn btn-info my btn-block">Reset password</button>
+        {{ form_end(resetForm) }}
+    </div>
+        
+{% endblock %}

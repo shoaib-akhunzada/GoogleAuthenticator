@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %} 
+    <div class="col-md-7 mx-auto border border-light p-5 mt-5">
+
+        <p class="h4 mb-4 text-center">Register</p>
+
+        {% for flashMessage in app.flashes('error') %}
+            <div class="alert alert-danger" role="alert">{{ flashMessage }}</div>
+        {% endfor %}
+        
+        {% for flashMessage in app.flashes('success') %}
+           <div class="alert alert-success" role="alert">{{ flashMessage }}</div>
+       {% endfor %}
+       
+        {{ form_start(registrationForm) }}
+
+            <div class="pb-2">
+                {{ form_errors(registrationForm.username) }}
+            </div>
+            {{ form_widget(registrationForm.username, {'attr': {'class': 'mb-4'}}) }}
+           
+            <div class="pb-2">
+                {{ form_errors(registrationForm.email) }}
+            </div>
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'mb-4'}}) }}
+           
+            <div class="pb-2">
+                {{ form_errors(registrationForm.password) }}
+            </div>
+            {{ form_widget(registrationForm.password) }}
+            <small class="form-text text-muted mb-4">
+                {{ form_help(registrationForm.password) }}
+            </small>
+        
+            <div class="form-group custom-checkbox">
+              {{ form_widget(registrationForm.googleAuthenticatorSecret) }}
+              {{ form_label(registrationForm.googleAuthenticatorSecret) }}
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <div class="g-recaptcha" data-sitekey="{{ recaptchaSiteKey }}"></div>
+                    <span id="captcha" style="color:red"/>
+                </div>
+            </div>
+                
+            <button class="btn btn-info my btn-block" onClick="return get_action();">Save</button>
+
+        {{ form_end(registrationForm) }}
+
+    </div>    
+                    
+{% endblock %}
+
+{% block javascripts %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+    function get_action(form) 
+     {
+        var v = grecaptcha.getResponse();
+        if(v.length == 0)
+        {
+            document.getElementById('captcha').innerHTML="You can't leave Captcha empty";
+            return false;
+        }
+         
+        return true; 
+     }
+   </script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Google 2fa{% endblock %}
+
+{% block body %}
+    
+    <div class="col-md-7 mx-auto border border-light p-5 mt-5">
+        
+        <p class="h4 mb-4 text-center">Authentication Code</p>
+        
+        <div class="text-center">
+            <img id="imageQRcode"src="{{ qrCode }}" />
+        </div>    
+
+        {{ form_start(check2faForm, {'action': path('2fa_login_check')}) }}
+            {{ form_widget(check2faForm.auth_code, {'attr': {'class': 'mb-4'}}) }}
+
+            <button class="btn btn-info btn-block my-4" type="submit">Login</button>
+        {{ form_end(check2faForm) }}
+
+        <div class="text-center">
+            <a href="{{ path('logout') }}">Cancel</a>
+        </div>    
+       
+    </div>        
+
+{% endblock %}

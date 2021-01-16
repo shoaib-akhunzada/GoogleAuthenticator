@@ -1,0 +1,52 @@
+security:
+    encoders:
+      App\Entity\User:
+        algorithm: bcrypt
+    providers:
+        my_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            form_login:
+                login_path: login
+                check_path: login
+                provider: my_provider
+                default_target_path: dashboard
+                always_use_default_target_path: true
+                # field names for the username and password fields
+                username_parameter: login_form[username]
+                password_parameter: login_form[password]
+            two_factor:
+               auth_form_path: 2fa_login    # The route name you have used in the routes.yaml
+               check_path: 2fa_login_check  # The route name you have used in the routes.yaml  
+               auth_code_parameter_name: check2fa_form[auth_code]
+            logout:
+                path: logout
+                target: home
+            remember_me:    
+                secret:   '%kernel.secret%'
+                lifetime: 604800    # 1 week in seconds    
+                remember_me_parameter: login_form[remember_me]
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
+        # This makes the logout route accessible during two-factor authentication. Allows the user to
+        # cancel two-factor authentication, if they need to.
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # This ensures that the form can only be accessed when two-factor authentication is in progress.
+        - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
