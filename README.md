@@ -3,7 +3,7 @@ Information
   -	Login and Registration 
   -	 Authenticated User Dashboard
   -	 User Settings Page for turning on/off/reconfiguring two factor authentication.
-  -	 Two Factor Setup / Google Authenticator
+  -	 Two factor authentication / Symfony Google Authenticator
   -	 Password Reset 
   -	 TOS Acceptance
 
