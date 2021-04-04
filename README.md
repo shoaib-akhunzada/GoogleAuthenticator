@@ -1,4 +1,4 @@
-Google Authenticator in Symfony 5
+<h1>Google Authenticator in Symfony 5 </h1>
 
   - Symfony 5.*
   -	Login and Registration 
@@ -8,7 +8,7 @@ Google Authenticator in Symfony 5
   -	 Password Reset 
   -	 TOS Acceptance
 
-Configuration and setup
+<h2>Configuration and setup </h2>
 
   1)	Composer update.
   2)	Update .env file for database, email and recaptcha set up 
